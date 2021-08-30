@@ -2,10 +2,14 @@ package com.evan.wj.controller;
 
 import com.evan.wj.pojo.Book;
 import com.evan.wj.service.BookService;
+import com.evan.wj.util.StringUtils;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -63,4 +67,26 @@ public class LibraryController {
             return bookService.Search(key);
         }
     }*/
+
+    @PostMapping("api/covers")
+    public String coverUpload(MultipartFile file) throws Exception{
+        String folder = "C:/images/wj";
+        File imageFolder = new File(folder);//图片文件夹
+
+        File f = new File(imageFolder, StringUtils.getRandomString(6) + file.getOriginalFilename()
+        .substring(file.getOriginalFilename().length() - 5));//对接收到的文件重命名，但保留原始的格式(保留后缀名）
+        /*System.out.println("ff: "+file.getOriginalFilename());
+        System.out.println("ff: "+file.getOriginalFilename().substring(file.getOriginalFilename().length() - 5));
+        System.out.println("ff: "+ f);*/
+        if (!f.getParentFile().exists()){
+            f.getParentFile().mkdirs();
+        }try {
+            file.transferTo(f);
+            String imgURL = "http://localhost:8443/api/file/" + f.getName();
+            return imgURL;
+        }catch (IOException e){
+            e.printStackTrace();
+            return "";
+        }
+    }
 }
