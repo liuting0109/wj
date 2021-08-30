@@ -3,8 +3,7 @@ package com.evan.wj.config;
 import com.evan.wj.interceptor.LoginInterceptor;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 /**
  * @Auther: liuting
@@ -19,6 +18,16 @@ public class MyWebConfigurer implements WebMvcConfigurer {
     public LoginInterceptor getLoginInterceptor(){
         return new LoginInterceptor();
     }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        //所有请求都允许跨域
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("*")
+                .allowedHeaders("*");
+    }
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
