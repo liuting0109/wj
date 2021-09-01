@@ -1,6 +1,7 @@
 package com.evan.wj.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
  * @Description:
  */
 
+@Data
 @Entity//表示这是一个实体类
 @Table(name = "user")//表示对应的表名是 user
 @JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
@@ -18,31 +20,38 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Integer id;
-    String username;
-    String password;
+    private Integer id;
 
-    public int getId() {
-        return id;
-    }
+    /**
+     * Username.
+     */
+    private String username;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    /**
+     * Password.
+     */
+    private String password;
 
-    public String getUsername() {
-        return username;
-    }
+    /**
+     * Salt for encoding.
+     */
+    private String salt;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    /**
+     * Real name.
+     */
+    private String name;
 
-    public String getPassword() {
-        return password;
-    }
+    /**
+     * Phone number.
+     */
+    private String phone;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    /**
+     * Email address.
+     *
+     * A Email address can be null,but should be correct if exists.
+     */
+    private String email;
+
 }
