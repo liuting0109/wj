@@ -38,12 +38,15 @@ public class LoginController {
 
         String username = requestUser.getUsername();
         Subject subject = SecurityUtils.getSubject();
-//        username = HtmlUtils.htmlEscape(username);// 对 html 标签进行转义，防止 XSS 攻击
+        username = HtmlUtils.htmlEscape(username);// 对 html 标签进行转义，防止 XSS 攻击
 
         UsernamePasswordToken token = new UsernamePasswordToken(username, requestUser.getPassword());
+        token.setRememberMe(true);
         try {
             subject.login(token);
-            return ResultFactory.buildSuccessResult(username);
+            User user = userService.getByName(username);
+            session.setAttribute("user",user);
+            return ResultFactory.buildSuccessResult(user);
         }catch (AuthenticationException e){
             String msg = "账号密码错误";
             return ResultFactory.buildFailResult(msg);
@@ -93,5 +96,22 @@ public class LoginController {
         userService.add(user);
 
         return ResultFactory.buildSuccessResult(user);
+    }
+
+    @GetMapping("api/logout")
+    @ResponseBody
+    public Result logout(){
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+            subject.logout();
+        }
+        String msg = "成功登出";
+        return ResultFactory.buildSuccessResult(msg);
+    }
+
+    @ResponseBody
+    @GetMapping(value = "api/authentication")
+    public String authentication(){
+        return "身份认证成功";
     }
 }

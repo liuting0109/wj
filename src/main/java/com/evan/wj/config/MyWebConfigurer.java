@@ -21,12 +21,14 @@ public class MyWebConfigurer implements WebMvcConfigurer {
         return new LoginInterceptor();
     }
 
+    //支持跨域配置
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         //所有请求都允许跨域
         registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("*")
+                .allowCredentials(true)
+                .allowedOrigins("http://localhost:8080")
+                .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
                 .allowedHeaders("*");
     }
 
@@ -34,7 +36,12 @@ public class MyWebConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry){
 //        这条语句的作用是对所有路径应用拦截器，除了 /index.html
-        registry.addInterceptor(getLoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/index.html");
+        registry.addInterceptor(getLoginInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/index.html")
+                .excludePathPatterns("/api/login")
+                .excludePathPatterns("/api/logout")
+                .excludePathPatterns("/api/register");
     }
 
     @Override
