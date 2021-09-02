@@ -62,18 +62,21 @@ public class ShiroConfiguration {
         return authorizationAttributeSourceAdvisor;
     }
 
-    @Bean
+
     public CookieRememberMeManager rememberMeManager(){
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(rememberMeCookie());
-        cookieRememberMeManager.setCipherKey("LIUTINGNIGHTLY_WAOU".getBytes());
+        // cookieRememberMeManager.setCipherKey传入参数为长度16位的byte[]，
+        // 否则会报Unable to init cipher instance:无法初始化密码实例的错误,
+        cookieRememberMeManager.setCipherKey("LIUTING0109_WAOU".getBytes());
         return cookieRememberMeManager;
     }
 
     @Bean
     public SimpleCookie rememberMeCookie(){
         SimpleCookie cookie = new SimpleCookie("rememberMe_lt");
-        cookie.setMaxAge(259200);
+        //cookie生效时间30天,单位秒;
+        cookie.setMaxAge(2592000);
         return cookie;
     }
 }
