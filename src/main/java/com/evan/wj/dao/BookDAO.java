@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 /**
- * @Auther: liuting
+ * @Author: liuting
  * @Date: 2021/8/27 15:04
  * @Description:
  */

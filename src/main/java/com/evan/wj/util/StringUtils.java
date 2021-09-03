@@ -3,7 +3,7 @@ package com.evan.wj.util;
 import java.util.Random;
 
 /**
- * @Auther: liuting
+ * @Author: liuting
  * @Date: 2021/8/30 15:42
  * @Description:
  */

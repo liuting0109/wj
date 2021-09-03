@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 /**
- * @Auther: liuting
+ * @Author: liuting
  * @Date: 2021/8/26 15:46
  * @Description:
  */

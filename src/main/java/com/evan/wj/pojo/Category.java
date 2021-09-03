@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 /**
- * @Auther: liuting
+ * @Author: liuting
  * @Date: 2021/8/27 14:56
  * @Description:
  */

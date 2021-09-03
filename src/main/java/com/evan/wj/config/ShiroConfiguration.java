@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @Auther: liuting
+ * @Author: liuting
  * @Date: 2021/9/1 11:57
  * @Description:
  */

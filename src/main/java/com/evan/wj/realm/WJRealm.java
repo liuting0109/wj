@@ -14,7 +14,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @Auther: liuting
+ * @Author: liuting
  * @Date: 2021/9/1 14:18
  * @Description: 创建 Realm 并重写获取认证与授权信息的方法
  */

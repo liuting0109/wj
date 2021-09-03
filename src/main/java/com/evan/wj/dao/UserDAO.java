@@ -4,7 +4,7 @@ import com.evan.wj.pojo.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * @Auther: liuting
+ * @Author: liuting
  * @Date: 2021/8/26 10:28
  * @Description:
  */

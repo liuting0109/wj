@@ -1,7 +1,7 @@
 package com.evan.wj.result;
 
 /**
- * @Auther: liuting
+ * @Author: liuting
  * @Date: 2021/9/1 10:30
  * @Description:
  */

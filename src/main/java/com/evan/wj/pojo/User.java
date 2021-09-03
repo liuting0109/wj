@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 /**
- * @Auther: liuting
+ * @Author: liuting
  * @Date: 2021/8/26 09:40
  * @Description:
  */
