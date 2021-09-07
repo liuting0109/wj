@@ -5,11 +5,13 @@ import com.evan.wj.pojo.AdminMenu;
 import com.evan.wj.pojo.AdminRoleMenu;
 import com.evan.wj.pojo.AdminUserRole;
 import com.evan.wj.pojo.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +31,8 @@ public class AdminMenuService {
     @Autowired
     AdminRoleMenuService adminRoleMenuService;
 
+    public static final Logger log = LogManager.getLogger(AdminMenuService.class);
+
     public List<AdminMenu> getAllByParentId(int parentId) {
         return adminMenuDAO.findAllByParentId(parentId);
     }
@@ -37,16 +41,19 @@ public class AdminMenuService {
         // Get current user in DB.
         String username = SecurityUtils.getSubject().getPrincipal().toString();
         User user = userService.getByName(username);
+//        log.info("uu: ",user);
 
         // Get roles' ids of current user.
         List<Integer> rids = adminUserRoleService.listAllByUid(user.getId())
                 .stream().map(AdminUserRole::getRid).collect(Collectors.toList());
+//        log.info("uu: ",rids);
 
         // Get menu items of these roles.
         List<Integer> menuIds = adminRoleMenuService.findAllByRid(rids)
                 .stream().map(AdminRoleMenu::getMid).collect(Collectors.toList());
         List<AdminMenu> menus = adminMenuDAO.findAllById(menuIds).stream().distinct().collect(Collectors.toList());
-
+//        log.info("menuIds: ",menuIds.size());
+//        log.info("uu: ",menus);
         // Adjust the structure of the menu.
         handleMenus(menus);
         return menus;
